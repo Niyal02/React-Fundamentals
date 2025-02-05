@@ -1,0 +1,58 @@
+  .container {
+    max-width: 500px;
+    width: 100%;
+    padding: 20px;
+    background-color: #f4dddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(137, 133, 133, 0.596);
+  
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    /* padding-bottom: 30px; */
+  }
+  
+.group label,
+.image label,
+.category label,
+.condition label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: black;
+}
+
+.group input[type="text"],
+.group input[type="number"],
+.image input[type="file"],
+.category select,
+.group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  /* background-color: white; */
+  box-sizing: border-box; 
+}
+  
+
+  .sbutton {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .sbutton:hover {
+    background-color: #0056b3;
+  }
