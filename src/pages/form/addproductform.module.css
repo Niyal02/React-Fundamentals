@@ -12,7 +12,6 @@
     text-align: center;
     color: #333;
     margin-bottom: 30px;
-    /* padding-bottom: 30px; */
   }
   
 .group label,
@@ -32,11 +31,32 @@
 .group textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: none;
+  /* border: 1px solid #ccc; */
+  box-shadow: 0 0 0 1px #ccc;
+  
   border-radius: 5px;
   font-size: 16px;
-  /* background-color: white; */
   box-sizing: border-box; 
+}
+
+input[data-invalid="true"] {
+  box-shadow: 0 0 0 1px red !important;
+}
+
+.thumbnail{
+  width: 100px;
+  height: 100px;
+}
+
+.error{
+  display: block;
+  font-size: 13px;
+  margin-top: 5px;
+  color: red;
+  /* font-size: 16px; */
+
+  /* border: 1px solid red; */
 }
   
 
