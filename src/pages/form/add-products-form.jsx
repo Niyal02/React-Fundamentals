@@ -81,7 +81,7 @@ const ProductForm = () => {
     if(!product.name.trim()) {           // trim is used to remove whitespace from beginning and end of string
       setErrors(prevErrors => ({
         ...prevErrors,
-        name: "*Product name is required"
+        name: "*Name is required"
       }))
       isFormValid = false;
     }
@@ -90,7 +90,7 @@ const ProductForm = () => {
     if(!product.description.trim()) {
       setErrors(prevErrors => ({
         ...prevErrors,
-        description: "*Product description is required"
+        description: "*Description is required"
       }))
       isFormValid = false;
     }
@@ -99,7 +99,7 @@ const ProductForm = () => {
     if(product.image.length === 0) {          //array cannot consists of trim function
       setErrors(prevErrors => ({
         ...prevErrors,
-        image: "*Product image is required"
+        image: "*Image is required"
       }))
       isFormValid = false;
     }
@@ -108,7 +108,7 @@ const ProductForm = () => {
     if(!product.category.trim()) {
       setErrors(prevErrors => ({
         ...prevErrors,
-        category: "*Product category is required"
+        category: "*Category is required"
       }))
       isFormValid = false;
     }
@@ -117,7 +117,7 @@ const ProductForm = () => {
     if(!product.condition) {
       setErrors(prevErrors => ({
         ...prevErrors,
-        condition: "*Please choose one condition"
+        condition: "*Please choose a condition"
       }))
       isFormValid = false;
     }
@@ -126,7 +126,7 @@ const ProductForm = () => {
     if(!product.price.trim()) {
       setErrors(prevErrors => ({
         ...prevErrors,
-        price: "*Product price is required"
+        price: "*Price is required"
       }))
       isFormValid = false;
     } else if(isNaN(product.price) || parseFloat(product.price) < 0 ) {
@@ -172,21 +172,21 @@ const ProductForm = () => {
         <div className={classes.group}>
         <label style={{color: 'black'}} > Product Name: </label>
         <input type="text" name="name" value={product.name} style={{color:"black"}} onChange={handleChange} required  placeholder="Enter your product name" ref={nameRef} className={classes.error} data-invalid={errors.name ? "true" : "false"} />
-        {errors.name }  {/* in input tag onBlur is used when the focus on a particular field is changed, we used validateForm so it can validate */}
+        {errors.name && <span style={{color:'red'}}>{errors.name}</span>}  {/* in input tag onBlur is used when the focus on a particular field is changed, we used validateForm so it can validate */}
         </div>
 
         {/* product description */}
         <div className={classes.group}>
         <label style={{color: 'black'}} > Description: </label>
         <input type="text" name="description" value={product.description} onChange={handleChange} required placeholder="Enter your products description" ref={descriptionRef}/>
-        {errors.description  }
+        {errors.description && <span style={{color:'red'}}>{errors.description}</span> }
         </div>
 
         {/* product image */}
         <div className={classes.image}>
         <label style={{color: 'black'}}> Image: </label>
         <input type="file"  name="image" style={{color:"black"}} onChange={handleFileChange}  required multiple ref={imageRef} />
-        {errors.image}
+        {errors.image && <span style={{color:'red'}}>{errors.image}</span>}
         </div>
 
         {/* Preview product image */}
@@ -206,7 +206,7 @@ const ProductForm = () => {
           <option value="clothes">Clothes</option>
           <option value="electronics">Electronics</option>
         </select>
-        {errors.category}
+        {errors.category && <span style={{color:'red'}}>{errors.category}</span>}
         </div>
 
         {/* product condition */}
@@ -218,7 +218,7 @@ const ProductForm = () => {
         <label> 
           <input type="radio" name="condition" value='used' onChange={handleChange} required ref={conditionRef}/> Used
         </label>
-        {errors.condition}
+        {errors.condition && <span className={classes.condition_error}>{errors.condition}</span>}
         </div>
 
         {/* product price */}
@@ -226,8 +226,7 @@ const ProductForm = () => {
         <label style={{color: 'black'}}> Price: </label>
         <input type="number" name="price" value={product.price} onChange={handleChange}  required placeholder="Enter your products price" ref={priceRef} />
         {errors.price && <span className={classes.error}>{errors.price}</span> }
-        </div>
-        
+        </div>       
         <button onClick={() => navigate('/add-product-success-redirect')} type="submit" className={classes.sbutton}>Submit</button>
       </form>
       
