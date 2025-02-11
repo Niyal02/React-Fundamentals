@@ -4,6 +4,7 @@ import Home from './pages/home/home';
 import DisplayProducts from './pages/product-page/display-products';
 import "./App.css"
 import ProductForm from './pages/form/add-products-form';
+import AddProductSuccessRedirect from './pages/form/add-product-success-redirect';
 
 // import { useState, useEffect } from 'react';
 // import useTimer from './hooks/useTimer';
@@ -168,6 +169,7 @@ function App(){
         <Route path='/' element={<Home/>}/>
         <Route path='/display-products' element={<DisplayProducts/>}/>
         <Route path='/add-products-form' element={<ProductForm/>}/>
+        <Route path='/add-product-success-redirect' element={<AddProductSuccessRedirect/>}/>
       </Routes> 
     </BrowserRouter>
   )

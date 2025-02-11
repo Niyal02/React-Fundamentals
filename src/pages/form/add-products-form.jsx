@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react"
 import classes from './addproductform.module.css'
+import { useNavigate } from "react-router-dom"
+import axios from "axios";
+
 
 const ProductForm = () => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState({
     name:'',
     description:'',
@@ -21,7 +25,7 @@ const ProductForm = () => {
   });
   console.log({errors});
 
-  useEffect(() => {       //use effect is used here  to make 'focus' work. previously no useEffect was used os focus didnt work.
+  useEffect(() => {       //use effect is used here  to make 'focus' work. previously no useEffect was used so focus didnt work.
     if (errors.name) {
       nameRef.current.focus();
     }
@@ -64,7 +68,7 @@ const ProductForm = () => {
 
   const validateForm = () => {
     let isFormValid = true;
-    setErrors({         //this step is done/copied again for when u press submit button, it resets/rerenders the error part and empties it again
+    setErrors({         //this step is done/copied again for when u press submit button, it resets/re-renders the error part and empties it again
       name:'',
       description:'',
       image:'',        
@@ -77,7 +81,7 @@ const ProductForm = () => {
     if(!product.name.trim()) {           // trim is used to remove whitespace from beginning and end of string
       setErrors(prevErrors => ({
         ...prevErrors,
-        name: "Product name is required"
+        name: "*Product name is required"
       }))
       isFormValid = false;
     }
@@ -86,7 +90,7 @@ const ProductForm = () => {
     if(!product.description.trim()) {
       setErrors(prevErrors => ({
         ...prevErrors,
-        description: "Product description is required"
+        description: "*Product description is required"
       }))
       isFormValid = false;
     }
@@ -95,7 +99,7 @@ const ProductForm = () => {
     if(product.image.length === 0) {          //array cannot consists of trim function
       setErrors(prevErrors => ({
         ...prevErrors,
-        image: "Product image is required"
+        image: "*Product image is required"
       }))
       isFormValid = false;
     }
@@ -104,7 +108,7 @@ const ProductForm = () => {
     if(!product.category.trim()) {
       setErrors(prevErrors => ({
         ...prevErrors,
-        category: "Product category is required"
+        category: "*Product category is required"
       }))
       isFormValid = false;
     }
@@ -113,7 +117,7 @@ const ProductForm = () => {
     if(!product.condition) {
       setErrors(prevErrors => ({
         ...prevErrors,
-        condition: "Please choose one condition"
+        condition: "*Please choose one condition"
       }))
       isFormValid = false;
     }
@@ -122,13 +126,13 @@ const ProductForm = () => {
     if(!product.price.trim()) {
       setErrors(prevErrors => ({
         ...prevErrors,
-        price: "Product price is required"
+        price: "*Product price is required"
       }))
       isFormValid = false;
     } else if(isNaN(product.price) || parseFloat(product.price) < 0 ) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        price: "Price must be a positive number"
+        price: "*Price must be a positive number"
       }))
       isFormValid = false;
     }
@@ -136,16 +140,27 @@ const ProductForm = () => {
     return isFormValid; 
   }
 
-  const handleSubmit =(e) =>{
+  const handleSubmit = async(e) =>{
     e.preventDefault();
 
     // validation 
     if(validateForm()){
+       try {
+        const response =  await axios.post('https://fakestoreapi.com/products',  {
+          title: product.name,
+          price: product.price,
+          description: product.description,
+          image: product.imagePreview,
+          category: product.category
+      })
+        localStorage.setItem('product', JSON.stringify(response.data))
+
+       } catch (error) {
+        console.log("Product validation failed", error);
+       }
       console.log("Product Details:", product);   //validating form for success or no success
       alert('Product added successfully')
-    }else{
-      console.log("Product validation failed");
-    }  
+    } 
   }
 
   return (
@@ -176,9 +191,9 @@ const ProductForm = () => {
 
         {/* Preview product image */}
         <div className={classes.preview}>
-          {product.imagePreview && 
+          {product.imagePreview ?. 
               product.imagePreview.map((preview, index) => (
-                <img key={index} src={preview} alt={`Preview ${index}`} className={classes.thumbnail} ref={imageRef}  />
+                <img key={index} src={preview} alt={`Preview ${index}`} className={classes.thumbnail} ref={imageRef}/>
               ))}
         </div>
 
@@ -208,12 +223,12 @@ const ProductForm = () => {
 
         {/* product price */}
         <div className={classes.group}>
-        <label style={{color: 'black'}}  > Price: </label>
+        <label style={{color: 'black'}}> Price: </label>
         <input type="number" name="price" value={product.price} onChange={handleChange}  required placeholder="Enter your products price" ref={priceRef} />
         {errors.price && <span className={classes.error}>{errors.price}</span> }
         </div>
         
-        <button type="submit" className={classes.sbutton}>Submit</button>
+        <button onClick={() => navigate('/add-product-success-redirect')} type="submit" className={classes.sbutton}>Submit</button>
       </form>
       
     </div>
