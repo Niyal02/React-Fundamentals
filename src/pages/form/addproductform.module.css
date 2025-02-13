@@ -32,7 +32,6 @@
   width: 100%;
   padding: 12px;
   border: none;
-  /* border: 1px solid #ccc; */
   box-shadow: 0 0 0 1px #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -59,8 +58,7 @@ input[data-invalid="true"] {
   color: red;
 }
   
-
-  .sbutton {
+.sbutton {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
@@ -73,6 +71,6 @@ input[data-invalid="true"] {
     margin-top: 20px;
   }
   
-  .sbutton:hover {
+.sbutton:hover {
     background-color: #0056b3;
   }

@@ -1,12 +1,3 @@
-/* body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: rgba(84, 156, 119, 0.941);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-} */
-
 h1{
     font-family: cursive;
     text-align: center;
@@ -14,7 +5,7 @@ h1{
 }
 
 .product-container{
-    width: 60%;
+    width: 100%;
     margin: 20px auto;
     padding: 15px;
     background: rgba(179, 207, 176, 0.889) ;

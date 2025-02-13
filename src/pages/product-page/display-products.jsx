@@ -11,7 +11,7 @@ const DisplayProducts = ()=>{
             <h1 style={{flexGrow:1, textAlign:'center', color:'wheat'}}>Newly Released</h1>
             <button onClick={()=>navigate('/add-products-form')} style={{cursor: 'pointer', backgroundColor:'#28a745', padding: '8px 12px'}}>Add Products</button> 
       </div>
-      <Products />   {/* instead of writing all the codes from products.jsx/Products we simply call/import that function,can be reused in different pages like this*/}
+      <Products/>   {/* instead of writing all the codes from products.jsx/Products we simply call/import that function,can be reused in different pages like this*/}
     </div>
   )
 }

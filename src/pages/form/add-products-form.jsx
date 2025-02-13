@@ -160,6 +160,8 @@ const ProductForm = () => {
        }
       console.log("Product Details:", product);   //validating form for success or no success
       alert('Product added successfully')
+      
+      navigate("/add-product-success-redirect")
     } 
   }
 
@@ -191,8 +193,7 @@ const ProductForm = () => {
 
         {/* Preview product image */}
         <div className={classes.preview}>
-          {product.imagePreview ?. 
-              product.imagePreview.map((preview, index) => (
+          {product?.imagePreview?.map((preview, index) => (
                 <img key={index} src={preview} alt={`Preview ${index}`} className={classes.thumbnail} ref={imageRef}/>
               ))}
         </div>
@@ -224,10 +225,10 @@ const ProductForm = () => {
         {/* product price */}
         <div className={classes.group}>
         <label style={{color: 'black'}}> Price: </label>
-        <input type="number" name="price" value={product.price} onChange={handleChange}  required placeholder="Enter your products price" ref={priceRef} />
+        <input type="number" name="price" value={product.price} onChange={handleChange} required placeholder="Enter your products price" ref={priceRef} />
         {errors.price && <span className={classes.error}>{errors.price}</span> }
         </div>       
-        <button onClick={() => navigate('/add-product-success-redirect')} type="submit" className={classes.sbutton}>Submit</button>
+        <button type="submit" className={classes.sbutton}>Submit</button>
       </form>
       
     </div>
